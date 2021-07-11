@@ -1,0 +1,21 @@
+runtime: go115
+
+env: standard
+instance_class: F1
+handlers:
+  - url: '/api/v1/.*'
+    script: auto
+
+  - url: '/static/(.*)'
+    static_files: "dist/static/\\1"
+    require_matching_file: false
+    upload: 'dist/static/(.*)'
+
+  - url: '/'
+    static_files: dist/index.html
+    require_matching_file: false
+    upload: dist/index.html
+
+env_variables:
+  ORIGIN_ALLOWED: "<YOUR_CROS_DOMAIN_URL>" # you can change it, like https://rakuten-f2e.ccclin.tk
+  FIRESTORE_PROJECT: "<FIRESTORE_PROJECT>"
